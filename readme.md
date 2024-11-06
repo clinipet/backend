@@ -134,8 +134,8 @@ O sistema utiliza PostgreSQL com as seguintes tabelas:
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## Equipe
-[Victor Balchaki](https://github.com/sparkxrd/balchaki)   
-[Ricardo Assis](https://github.com/sparkxrd/seuamigoo)  
+[Victor Balchaki](https://github.com/balchaki)   
+[Ricardo Assis](https://github.com/seuamigoo)  
 
 Links do Projeto:     
 [Backend](https://github.com/clinipet/backend)   

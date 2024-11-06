@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const petRoutes = require('./routes/pet.routes');
+const petRoutes = require('./src/routes/pet.routes');
 
 app.use(express.json());
 

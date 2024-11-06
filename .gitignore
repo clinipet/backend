@@ -128,3 +128,13 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# IDEA IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea
+
+# Config Files
+.env

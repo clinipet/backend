@@ -26,7 +26,7 @@ const Pet = {
   },
   
   delete: (id) => {
-    return db.query('DELETE FROM clinipet.pets WHERE id = ', [id]);
+    return db.query('DELETE FROM clinipet.pets WHERE id = $1', [id]);
   }
 };
 

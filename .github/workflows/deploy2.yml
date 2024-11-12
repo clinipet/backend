@@ -21,14 +21,12 @@ jobs:
       - name: End existing process on the server
         env:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
-          ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
         run: |
-          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} ./stop-backend.sh'
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} '/root/stop-backend.sh'
 
       - name: Pull latest code
         env:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
-          ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
         run: |
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} '
             cd /home/clinipet/backend &&
@@ -39,7 +37,6 @@ jobs:
       - name: Install dependencies
         env:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
-          ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
         run: |
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} '
             cd /home/clinipet/backend &&

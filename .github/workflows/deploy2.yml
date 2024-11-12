@@ -20,7 +20,7 @@ jobs:
 
       - name: Deploy to server
         env:
-          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
           ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
         run: |
           echo "Starting deployment..."

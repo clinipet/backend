@@ -20,13 +20,11 @@ jobs:
 
       - name: Deploy to server
         env:
-          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
-          SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
         run: |
           echo "Starting deployment..."
-          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no -vvv $SERVER_USERNAME@$SERVER_HOST '
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no -vvv ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} '
           # Debugging: List files and check for permissions
           echo "Checking server environment..."
           ls -la /home/clinipet/backend || exit 1

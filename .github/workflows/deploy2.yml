@@ -53,7 +53,9 @@ jobs:
         run: |
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USERNAME@$SERVER_HOST "
             cd /home/clinipet/backend &&
+            rm -f .env &&
             echo \"$ENVIRONMENT\" > .env &&
             nohup npm run start > app.log 2>&1 &
+            disown
             echo 'Backend reiniciado.'
           "

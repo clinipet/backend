@@ -25,24 +25,21 @@ jobs:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
         run: |
-          # Encerrar o processo atual
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USERNAME@$SERVER_HOST '
+            # Encerrar o processo atual
             if pgrep -f "node.*start" > /dev/null; then
               pkill -f "node.*start"
               echo "Processo do backend encerrado."
             else
               echo "Nenhum processo do backend encontrado."
             fi
-          '
 
-          # Fazer o deploy
-          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USERNAME@$SERVER_HOST '
+            # Fazer o deploy
             cd /home/clinipet/backend &&
             git pull &&
             echo "Código atualizado."
 
-          # Instalar dependências e iniciar o serviço
-          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USERNAME@$SERVER_HOST '
+            # Instalar dependências e iniciar o serviço
             npm install &&
             echo "$ENVIRONMENT" > .env &&
             nohup npm run start > app.log 2>&1 &

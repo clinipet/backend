@@ -1,23 +1,32 @@
 src/
+├── config/
+│   ├── auth.config.js
+│   └── db.config.js
+├── middleware/
+│   └── auth.middleware.js
 ├── models/
 │   ├── client.model.js
 │   ├── pet.model.js
 │   ├── appointment.model.js
 │   ├── treatment.model.js
+│   ├── user.model.js
 │   └── veterinarian.model.js
 ├── controllers/
 │   ├── client.controller.js
 │   ├── pet.controller.js
 │   ├── appointment.controller.js
 │   ├── treatment.controller.js
+│   ├── auth.controller.js
 │   └── veterinarian.controller.js
 ├── routes/
 │   ├── client.routes.js
 │   ├── pet.routes.js
 │   ├── appointment.routes.js
 │   ├── treatment.routes.js
+│   ├── auth.routes.js
 │   └── veterinarian.routes.js
 ├── config/
 │   └── database.js
 ├── app.js
+├── .env
 └── server.js

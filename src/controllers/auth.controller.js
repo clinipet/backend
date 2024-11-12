@@ -18,13 +18,13 @@ exports.login = async (req, res) => {
         const user = await User.findByEmail(email);
 
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'Bad credentials.' });
         }
 
         const isPasswordValid = await User.isValidPassword(user, password);
 
         if (!isPasswordValid) {
-            return res.status(401).json({ message: 'Invalid password' });
+            return res.status(401).json({ message: 'Bad credentials.' });
         }
 
         // const userProfiles = await User.getUserProfiles(user.id);

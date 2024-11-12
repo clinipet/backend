@@ -23,14 +23,7 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
           ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
         run: |
-          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} '
-            if pgrep -f "node.*start" > /dev/null; then
-              pkill -f "node.*start"
-              echo "Processo do backend encerrado."
-            else
-              echo "Nenhum processo do backend encontrado."
-            fi
-          '
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} ./stop-backend.sh'
 
       - name: Pull latest code
         env:

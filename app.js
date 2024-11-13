@@ -10,9 +10,9 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 
 //Rotas públicas
-app.use('/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 
 //rotas privadas
-app.use('/pets', verifyToken, petRoutes);
+app.use('/api/pets', verifyToken, petRoutes);
 
 module.exports = app;

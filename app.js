@@ -11,8 +11,13 @@ app.use(express.urlencoded({ extended: true }));
 
 //Rotas públicas
 app.use('/api/auth', authRoutes);
+app.use('/api/auth/verify', verifyToken, (req, res) => {
+    res.status(200).json({ message: 'OK' });
+});
 
 //rotas privadas
 app.use('/api/pets', verifyToken, petRoutes);
+
+
 
 module.exports = app;

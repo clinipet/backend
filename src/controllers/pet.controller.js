@@ -52,3 +52,12 @@ exports.deletePet = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.totalPets = async(req, res) => {
+    try {
+        const result = await Pet.count();
+        res.json(result.rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}

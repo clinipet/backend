@@ -3,6 +3,7 @@ const router = express.Router();
 const petController = require('../controllers/pet.controller');
 
 router.get('/', petController.getAllPets);
+router.get('/count', petController.totalPets);
 router.get('/:id', petController.getPetById);
 router.post('/', petController.createPet);
 router.put('/:id', petController.updatePet);

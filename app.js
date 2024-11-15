@@ -22,9 +22,7 @@ app.use('/api/pets', verifyToken, petRoutes);
 
 //Frontend dev
 if(localBuild === 'true') {
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public', 'index.html'));
-    });
+    app.use(express.static(__dirname + '/public'));
 }
 
 module.exports = app;

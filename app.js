@@ -1,3 +1,5 @@
+require('dotenv').config()
+const localBuild = process.env.LOCAL_BUILD;
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -18,6 +20,11 @@ app.use('/api/auth/verify', verifyToken, (req, res) => {
 //rotas privadas
 app.use('/api/pets', verifyToken, petRoutes);
 
-
+//Frontend dev
+if(localBuild === 'true') {
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    });
+}
 
 module.exports = app;

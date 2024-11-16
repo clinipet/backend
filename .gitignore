@@ -138,3 +138,6 @@ dist
 
 # Config Files
 .env
+
+#Frontend files
+public/

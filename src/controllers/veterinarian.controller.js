@@ -1,72 +1,63 @@
 const Veterinarian = require('../models/veterinarian.model');
 
-exports.getAllVeterinarians = async (req, res) => {
-  try {
-    const result = await Veterinarian.getAll();
-    res.json(result.rows);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-exports.getVeterinarianById = async (req, res) => {
-  try {
-    const result = await Veterinarian.getById(req.params.id);
-    if (result.rows.length > 0) {
-      res.json(result.rows[0]);
-    } else {
-      res.status(404).json({ message: 'Veterinário não encontrado' });
+exports.obterTodosVeterinarios = async (req, res) => {
+    try {
+        const resultado = await Veterinarian.obterTodos();
+        res.json(resultado.rows);
+    } catch (erro) {
+        res.status(500).json({ mensagem: erro.message });
     }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
 };
 
-exports.createVeterinarian = async (req, res) => {
-  try {
-    const result = await Veterinarian.create(req.body);
-    res.status(201).json(result.rows[0]);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-exports.updateVeterinarian = async (req, res) => {
-  try {
-    const result = await Veterinarian.update(req.params.id, req.body);
-    if (result.rows.length > 0) {
-      res.json(result.rows[0]);
-    } else {
-      res.status(404).json({ message: 'Veterinário não encontrado' });
+exports.obterVeterinarioPorId = async (req, res) => {
+    try {
+        const resultado = await Veterinarian.obterPorId(req.params.id);
+        if (resultado.rows.length > 0) {
+            res.json(resultado.rows[0]);
+        } else {
+            res.status(404).json({ mensagem: 'Veterinário não encontrado' });
+        }
+    } catch (erro) {
+        res.status(500).json({ mensagem: erro.message });
     }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
 };
 
-exports.deleteVeterinarian = async (req, res) => {
-  try {
-    await Veterinarian.delete(req.params.id);
-    res.status(204).send();
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+exports.criarVeterinario = async (req, res) => {
+    try {
+        const resultado = await Veterinarian.criar(req.body);
+        res.status(201).json(resultado.rows[0]);
+    } catch (erro) {
+        res.status(500).json({ mensagem: erro.message });
+    }
 };
 
-exports.getStatistics = async (req, res) => {
-  try {
-    const [totalVets, consultationsToday, averageRating] = await Promise.all([
-      Veterinarian.count(),
-      Veterinarian.getConsultationsToday(),
-      Veterinarian.getAverageRating()
-    ]);
+exports.atualizarVeterinario = async (req, res) => {
+    try {
+        const resultado = await Veterinarian.atualizar(req.params.id, req.body);
+        if (resultado.rows.length > 0) {
+            res.json(resultado.rows[0]);
+        } else {
+            res.status(404).json({ mensagem: 'Veterinário não encontrado' });
+        }
+    } catch (erro) {
+        res.status(500).json({ mensagem: erro.message });
+    }
+};
 
-    res.json({
-      totalVeterinarians: totalVets.rows[0].count,
-      consultationsToday: consultationsToday.rows[0].count,
-      averageRating: parseFloat(averageRating.rows[0].avg).toFixed(1)
-    });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+exports.excluirVeterinario = async (req, res) => {
+    try {
+        await Veterinarian.excluir(req.params.id);
+        res.status(204).send();
+    } catch (erro) {
+        res.status(500).json({ mensagem: erro.message });
+    }
+};
+
+exports.contarVeterinarios = async (req, res) => {
+    try {
+        const resultado = await Veterinarian.contar();
+        res.json({ total: parseInt(resultado.rows[0].count) });
+    } catch (erro) {
+        res.status(500).json({ mensagem: erro.message });
+    }
 };

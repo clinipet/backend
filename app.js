@@ -4,6 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const petRoutes = require('./src/routes/pet.routes');
+const clientRoutes = require('./src/routes/client.routes');
+const veterinariansRoutes = require('./src/routes/veterinarian.routes');
 const appointmentRoutes = require('./src/routes/appointment.routes');
 const authRoutes = require('./src/routes/auth.routes');
 const { verifyToken } = require('./src/middleware/auth.middleware');
@@ -20,7 +22,9 @@ app.use('/api/auth/verify', verifyToken, (req, res) => {
     res.status(200).json({ message: 'OK' });
 });
 app.use('/api/pets', verifyToken, petRoutes);
+app.use('/api/clients', verifyToken, clientRoutes);
 app.use('/api/appointment', verifyToken, appointmentRoutes)
+app.use('/api/veterinarians', verifyToken, veterinariansRoutes)
 
 
 //Frontend dev

@@ -5,6 +5,7 @@ const appointmentController = require('../controllers/appointment.controller');
 router.get('/upcoming', appointmentController.getUpcoming);
 router.get('/count', appointmentController.countTotal);
 router.get('/home/:id', appointmentController.getByIdHome);
+router.patch('/:id', appointmentController.cancelAppointment);
 
 
 module.exports = router;

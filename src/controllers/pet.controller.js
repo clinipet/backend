@@ -60,4 +60,13 @@ exports.totalPets = async(req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-}
+};
+
+exports.findByClient = async (req, res) => {
+  try {
+    const result = await Pet.findByClient(req.params.id);
+    res.status(200).send(result.rows);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

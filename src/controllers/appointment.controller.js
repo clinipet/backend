@@ -38,3 +38,13 @@ exports.getByIdHome = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+exports.cancelAppointment = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await Appointment.cancel(id);
+        res.json(result.rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}

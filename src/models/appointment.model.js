@@ -42,7 +42,7 @@ const Appointment = {
     },
 
     cancel: (id) => {
-        return db.query('UPDATE clinipet.appointments SET status = "Cancelado" WHERE id = $1', [id]);
+        return db.query('UPDATE clinipet.appointments SET status = 2 WHERE id = $1', [id]);
     },
 
     dashboardView: () => {

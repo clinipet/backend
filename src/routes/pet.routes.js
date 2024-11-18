@@ -8,5 +8,6 @@ router.get('/:id', petController.getPetById);
 router.post('/', petController.createPet);
 router.put('/:id', petController.updatePet);
 router.delete('/:id', petController.deletePet);
+router.get('/client/:id', petController.findByClient);
 
 module.exports = router;

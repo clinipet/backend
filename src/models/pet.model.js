@@ -31,6 +31,10 @@ const Pet = {
 
   count: () => {
     return db.query('SELECT COUNT(*) FROM clinipet.pets');
+  },
+
+  findByClient: (client_id) => {
+    return db.query('SELECT id, name  FROM clinipet.pets WHERE client_id = $1', [client_id]);
   }
 };
 

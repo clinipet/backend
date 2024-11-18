@@ -4,5 +4,6 @@ const clientController = require('../controllers/client.controller');
 
 router.get('/count', clientController.totalClients);
 router.get('/home', clientController.getClientsHome);
+router.get('/list', clientController.getClientSimple);
 
 module.exports = router;

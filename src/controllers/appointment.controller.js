@@ -48,3 +48,32 @@ exports.cancelAppointment = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+exports.getAppointmentsHome = async (req, res) => {
+    try {
+        const result = await Appointment.getAllDetailed();
+        res.json(result.rows);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+exports.countWeek = async (req, res) => {
+    try {
+        const result = await Appointment.countWeek();
+        res.json(result.rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+exports.updateAppointment = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const appointment = req.body;
+        const result = await Appointment.update(id, appointment);
+        res.json(result.rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}

@@ -8,30 +8,34 @@ const Pet = {
   getById: (id) => {
     return db.query('SELECT * FROM clinipet.pets WHERE id = ', [id]);
   },
-  
+
   create: (pet) => {
-    const { client_id, name, species, breed, birth_date, weight, gender } = pet;
+    const { client_id, name, species, breed, birth_date } = pet;
     return db.query(
-      'INSERT INTO clinipet.pets (client_id, name, species, breed, birth_date, weight, gender) VALUES (, , , , , , ) RETURNING *',
-      [client_id, name, species, breed, birth_date, weight, gender]
+        'CALL clinipet.create_pet($1, $2, $3, $4, $5)',
+        [client_id, name, parseInt(species), breed, birth_date]
     );
-  },
-  
-  update: (id, pet) => {
-    const { name, species, breed, birth_date, weight, gender } = pet;
-    return db.query(
-      'UPDATE clinipet.pets SET name = , species = , breed = , birth_date = , weight = , gender =  WHERE id =  RETURNING *',
-      [name, species, breed, birth_date, weight, gender, id]
-    );
-  },
-  
-  delete: (id) => {
-    return db.query('DELETE FROM clinipet.pets WHERE id = $1', [id]);
   },
 
-  count: () => {
-    return db.query('SELECT COUNT(*) FROM clinipet.pets');
+  update: (id, pet) => {
+    const { client_id, name, species, breed, birth_date } = pet;
+    return db.query(
+        'CALL clinipet.update_pet($1, $2, $3, $4, $5, $6)',
+        [id, client_id, name, species, breed, birth_date]
+    );
   },
+
+  delete: (id) => {
+    return db.query('CALL clinipet.delete_pet($1)', [id]);
+  },
+
+  count: (species = null) => {
+    return db.query(
+        'SELECT COUNT(*) FROM clinipet.pets WHERE ($1::int4 IS NULL OR species = $1)',
+        [species]
+    );
+  },
+
 
   findByClient: (client_id) => {
     return db.query('SELECT id, name  FROM clinipet.pets WHERE client_id = $1', [client_id]);
@@ -39,7 +43,15 @@ const Pet = {
 
   getAllDetailed: () => {
     return db.query('SELECT * FROM clinipet.pet_details');
+  },
+  getDetailedById: (id) => {
+    return db.query('SELECT * FROM clinipet.pet_details WHERE pet_id = $1', [id]);
+  },
+  getAllSpecies: () => {
+    return db.query('SELECT * from clinipet.species');
   }
+
+
 };
 
 module.exports = Pet;

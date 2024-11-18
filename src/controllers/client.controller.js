@@ -15,3 +15,11 @@ exports.getClientsHome = async(req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+exports.getClientSimple = async(req, res) => {
+    try{
+        const result = await Client.getSimple();
+        res.json(result.rows);
+    }catch (error){
+        res.status(500).json({ message: error.message });
+    }
+}

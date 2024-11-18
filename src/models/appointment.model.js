@@ -23,11 +23,9 @@ const Appointment = {
     },
 
     update: (id, appointment) => {
-        const { client_id, pet_id, date, time, status } = appointment;
-        return db.query(
-            'UPDATE clinipet.appointments SET client_id = , pet_id = , date = , time = , status =  WHERE id =  RETURNING *',
-            [client_id, pet_id, date, time, status, id]
-        );
+        const { pet_id, date, notes } = appointment;
+        return db.query('UPDATE clinipet.appointments SET pet_id = $1, appointment_date = $2, notes = $3 WHERE id = $4 RETURNING *',
+            [pet_id, date, notes, id]);
     },
 
     delete: (id) => {
@@ -47,6 +45,13 @@ const Appointment = {
 
     dashboardView: () => {
         return db.query('SELECT * FROM clinipet.daily_appointments');
+    },
+
+    getAllDetailed: () => {
+        return db.query('SELECT * FROM clinipet.appointments_details');
+    },
+    countWeek: () => {
+        return db.query('SELECT weekly_appointment_count as count FROM clinipet.count_weekly_appointments');
     }
 
 };

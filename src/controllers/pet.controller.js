@@ -55,7 +55,8 @@ exports.deletePet = async (req, res) => {
 
 exports.totalPets = async(req, res) => {
     try {
-        const result = await Pet.count();
+        const species = req.query.species;
+        const result = await Pet.count(species);
         res.json(result.rows[0]);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -79,3 +80,21 @@ exports.getPetsHome = async(req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+exports.getPetDetailed = async(req, res) => {
+    try {
+        const result = await Pet.getDetailedById(req.params.id);
+        res.json(result.rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.getPetSpecies = async(req, res) => {
+    try {
+        const result = await Pet.getAllSpecies();
+        res.json(result.rows);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}

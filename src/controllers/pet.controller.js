@@ -70,3 +70,12 @@ exports.findByClient = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.getPetsHome = async(req, res) => {
+    try {
+        const result = await Pet.getAllDetailed();
+        res.json(result.rows);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

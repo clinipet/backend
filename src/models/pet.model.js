@@ -35,6 +35,10 @@ const Pet = {
 
   findByClient: (client_id) => {
     return db.query('SELECT id, name  FROM clinipet.pets WHERE client_id = $1', [client_id]);
+  },
+
+  getAllDetailed: () => {
+    return db.query('SELECT * FROM clinipet.pet_details');
   }
 };
 

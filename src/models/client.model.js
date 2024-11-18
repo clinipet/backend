@@ -6,7 +6,11 @@ const Client = {
     },
     getAllDetailed : () => {
         return db.query('SELECT * FROM clinipet.client_details');
+    },
+    getSimple: () => {
+        return db.query('SELECT id, name FROM clinipet.clients');
     }
+
 };
 
 module.exports = Client;
